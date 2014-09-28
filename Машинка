@@ -1,0 +1,31 @@
+from graphics import *
+
+def main():
+    #draw the canvas
+    win=GraphWin("Прямоугольник")
+
+    #draw the rectangle
+    rect=Rectangle(Point(30,30),Point(110,50))
+    rect.setFill('green')
+
+    #draw the circle
+    center=Point(105,50)
+    circ2=Circle(center,15)
+    circ2.setFill('red')
+
+    center=Point(35,50)
+    circ=Circle(center,15)
+    circ.setFill('red')
+
+    tri=Polygon(Point(70,100),Point(40,140),Point(100,140))
+    tri.setFill('Black')
+    
+
+    #draw the shapes on the canvas
+    
+    circ2.draw(win)
+    
+    circ.draw(win)
+    rect.draw(win)
+    tri.draw(win)
+main()

@@ -1,0 +1,68 @@
+from graphics import *
+
+def main():
+    #draw the canvas
+    win=GraphWin("Прямоугольник")
+
+    #Нижний кузов
+    rect=Rectangle(Point(60,80),Point(160,110))
+    rect.setFill("blue")
+    outline=("black")
+
+    #Верхний кузов
+    rect2=Rectangle(Point(60,60),Point(110,80))
+    rect2.setFill('blue')
+
+    rect4=Rectangle(Point(145,80),Point(160,90))
+    rect4.setFill('yellow')
+
+    rect5=Rectangle(Point(150,95),Point(160,105))
+    rect5.setFill('orange')
+
+
+    #Запасное колесо
+    rect3=Rectangle(Point(50,70),Point(60,100))
+    rect3.setFill('black')
+
+    #Левое белое колесо
+    center=Point(75,110)
+    circ2=Circle(center,10)
+    circ2.setFill('white')
+
+    #Левое черное колесо
+    center=Point(75,110)
+    circ3=Circle(center,15)
+    circ3.setFill('black')
+
+    #Правое белое колесо
+    center=Point(145,110)
+    circ1=Circle(center,10)
+    circ1.setFill('white')
+
+    #Правое черное колесо
+    center=Point(145,110)
+    circ4=Circle(center,15)
+    circ4.setFill('black')
+
+    # Кривая (сглаженная ломаная)
+
+   
+    #Бампер
+    tri=Polygon(Point(110,60),Point(110,80),Point(130,80))
+    tri.setFill('blue')
+   
+    
+    
+
+    #draw the shapes on the canvas
+    circ4.draw(win)
+    circ3.draw(win)
+    circ2.draw(win)
+    circ1.draw(win)
+    rect.draw(win)
+    rect2.draw(win)
+    rect3.draw(win)
+    tri.draw(win)
+    rect4.draw(win)
+    rect5.draw(win)
+main()

@@ -1,0 +1,130 @@
+from graphics import *
+import time
+def main():
+    
+    #draw the canvas
+    win=GraphWin("Прямоугольник", 1000,1000)
+
+    #Нижний кузов
+    rect=Rectangle(Point(60,80),Point(160,110))
+    rect.setFill("blue")
+    outline=("black")
+
+    #Верхний кузов
+    rect2=Rectangle(Point(60,60),Point(110,80))
+    rect2.setFill('blue')
+
+    rect4=Rectangle(Point(145,80),Point(160,90))
+    rect4.setFill('yellow')
+
+    rect5=Rectangle(Point(150,95),Point(160,105))
+    rect5.setFill('orange')
+
+
+    #Запасное колесо
+    rect3=Rectangle(Point(50,70),Point(60,100))
+    rect3.setFill('black')
+
+    #Левое белое колесо
+    center=Point(75,110)
+    circ2=Circle(center,10)
+    circ2.setFill('white')
+
+    #Левое черное колесо
+    center=Point(75,110)
+    circ3=Circle(center,15)
+    circ3.setFill('black')
+
+    #Правое белое колесо
+    center=Point(145,110)
+    circ1=Circle(center,10)
+    circ1.setFill('white')
+
+    #Правое черное колесо
+    center=Point(145,110)
+    circ4=Circle(center,15)
+    circ4.setFill('black')
+
+    # Кривая (сглаженная ломаная)
+
+   
+    #Бампер
+    tri=Polygon(Point(110,60),Point(110,80),Point(130,80))
+    tri.setFill('blue')
+
+    # sport car
+
+    rect6=Rectangle(Point(70,160),Point(150,180))
+    rect6.setFill("black")
+
+    center=Point(90,180)
+    circ6=Circle(center,10)
+    circ6.setFill('red')
+
+    center=Point(190,180)
+    circ7=Circle(center,10)
+    circ7.setFill('red')
+
+    tri6=Polygon(Point(50,160),Point(80,160),Point(80,140))
+    tri6.setFill('blue')
+
+    tri7=Polygon(Point(150,160),Point(90,180),Point(200,180))
+    tri7.setFill('black')
+
+
+    rect8=Rectangle(Point(910,405),Point(918,407))
+    rect8.setFill("black")
+
+    center=Point(906,407)
+    circ8=Circle(center,10)
+    circ8.setFill('red')
+
+    center=Point(916,407)
+    circ9=Circle(center,10)
+    circ9.setFill('red')
+
+    tri8=Polygon(Point(904,407),Point(910,407),Point(910,405))
+    tri8.setFill('blue')
+
+    tri9=Polygon(Point(917,405),Point(917,403),Point(920,405))
+    tri9.setFill('black')
+
+   
+    facelist = [ circ1,circ2,circ3,circ4,circ6,circ7,circ8,circ9,rect,rect2,rect3,rect4,rect5,rect6,rect8,tri,tri6,tri7,tri8,tri9 ]
+
+    
+
+    #draw the shapes on the canvas
+    circ4.draw(win)
+    circ3.draw(win)
+    circ2.draw(win)
+    circ1.draw(win)
+    rect.draw(win)
+    rect2.draw(win)
+    rect3.draw(win)
+    tri.draw(win)
+    rect4.draw(win)
+    rect5.draw(win)
+    rect6.draw(win)
+    tri6.draw(win)
+    tri7.draw(win)
+    circ6.draw(win)
+    circ7.draw(win)
+    rect8.draw(win)
+    tri8.draw(win)
+    tri9.draw(win)
+    circ8.draw(win)
+    circ9.draw(win)
+
+    moveAllOnline(facelist,5,0,46,0.008)
+    moveAllOnline(facelist,5,0,46,0.008)
+def moveAllOnline(shapelist,dx,dy,reps,delay):
+    for i in range(reps):
+        moveAll(shapelist,dx,dy)
+        time.sleep(delay)
+
+def moveAll( shapelist,dx,dy):
+    for i in shapelist:
+        i.move(dx,dy)
+        
+main()

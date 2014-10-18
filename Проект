@@ -1,0 +1,126 @@
+# Так, вот наше творение.
+
+# Вообщем 5% мы взяли с учебника по PYTHON, книгу взял с городской библиотеки, если получится то в кафе учебник принесу.
+
+# Про Class Sprite узнал с сайта stackoverflow.com
+
+# Мы некоторые коды меняли как могли, т.к. нам другие не нравились, там свои ошибки были, короче было неудобно.
+
+
+import pygame
+
+window=pygame.display.set_mode((670,579))
+pygame.display.set_caption('Hello pygame')
+screen=pygame.Surface((670,579))
+info_string=pygame.Surface((670,70))
+
+class Sprite:
+    def __init__(self,xpos,ypos,filename):
+        self.x=xpos
+        self.y=ypos
+        self.bitmap=pygame.image.load(filename)
+        self.bitmap.set_colorkey((255,255,255))
+    def render(self):
+            screen.blit(self.bitmap,(self.x,self.y))
+def Intersect(x1,x2,y1,y2):
+    if (x1>x2-50) and (x1<x2+90) and (y1>y2-50) and (y1<y2+50):
+        return 1
+    else:
+        return 0
+# Верхний экран
+pygame.font.init()
+s_font=pygame.font.Font(None, 24)
+i_font=pygame.font.SysFont(None, 24)
+p_font=pygame.font.SysFont(None, 40)
+t_font=pygame.font.SysFont(None, 30)
+
+
+# Импортированые картинки
+# Герой
+hero=Sprite(200,450, 'ar3.jpg')
+# Враг
+zet=Sprite(20,30, 'al3.jpg')
+zet.go_right=False
+zet.step=2
+# Луч
+luk=Sprite(-100,350,'lu43.jpg')
+luk.push=False
+# Фон
+fon=Sprite(0,0, 'fon.jpg')
+
+done=True
+pygame.key.set_repeat(1,1)
+sc=0
+while done:
+    for e in pygame.event.get():
+        if e.type==pygame.QUIT:
+            done=False
+# Движение героя
+    if e.type==pygame.KEYDOWN:
+        if e.key==pygame.K_LEFT:
+            if hero.x>10:
+                hero.x-=10
+        if e.key==pygame.K_RIGHT:
+            if hero.x<570:
+                hero.x+=10
+        if e.key==pygame.K_UP:
+            if hero.y>80:
+                hero.y-=10
+        if e.key==pygame.K_DOWN:
+            if hero.y<450:
+                hero.y+=10
+# Выпуск стрелы
+        if e.key==pygame.K_SPACE:
+            if luk.push==False:
+                luk.x=hero.x+40
+                luk.y=hero.y
+                luk.push=True
+        
+# Цвет экранов
+    screen.fill((255,255,255))
+    info_string.fill((0,0,0))
+
+    
+
+# Движение врага
+    if zet.go_right==True:
+        zet.x+=zet.step
+        if zet.x>540:
+            zet.go_right=False
+    else:
+        zet.x-=zet.step
+        if zet.x<0:
+            zet.go_right=True
+# Свойства луча
+    if luk.y<0:
+        luk.push=False
+        sc-=1
+        print "Мимо"
+    if luk.push==False:
+        luk.y=360
+        luk.x=-100
+    else:
+        luk.y-=15
+
+
+    if Intersect(luk.x, zet.x, luk.y, zet.y)==True:
+        luk.push=False
+        zet.step+=0.2
+        sc+=1
+        print "Попал"
+
+        
+
+
+    fon.render()
+    hero.render()
+    zet.render()
+    luk.render()
+    info_string.blit(s_font.render("Speed: " +str(zet.step) , 1, (210,120,200)), (450,5))
+    info_string.blit(i_font.render("Score: " +str(sc), 1,(210,120,200)),(100,5))
+    info_string.blit(p_font.render("GALAGA ", 1,(100,100,200)),(270,5))
+    info_string.blit(t_font.render("by Ardak and Almas ", 1,(100,100,200)),(230,30))
+    window.blit(info_string, (0,0))
+    window.blit(screen, (0,60))
+    pygame.display.flip()
+    pygame.time.delay(5)
